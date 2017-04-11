@@ -1,12 +1,8 @@
 package com.inc.xy;
 
-import ch.qos.logback.core.net.server.Client;
 import com.inc.xy.model.Document;
 import com.inc.xy.model.repository.DocumentRepository;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
