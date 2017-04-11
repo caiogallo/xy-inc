@@ -42,13 +42,15 @@ public class XYIncApplication implements CommandLineRunner{
         client.getStructure().put("first_name", "String");
         client.getStructure().put("last_name", "String");
         documentRepository.insert(client);
-        
-        
-        
+                
         List<Document> findAll = documentRepository.findAll();
         for(Document d: findAll){
             System.out.println(d.getModel()+ ", " + d.getStructure());
         }
+        
+        Document modelClient = documentRepository.findByModel("Client");
+        System.out.println(modelClient);
+
         
         
         

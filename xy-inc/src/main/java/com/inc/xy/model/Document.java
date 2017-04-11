@@ -34,6 +34,10 @@ public class Document {
     public void setStructure(Map structure) {
         this.structure = structure;
     }
-    
+
+    @Override
+    public String toString() {
+        return "Document{" + "model=" + model + ", structure=" + structure + '}';
+    }
     
 }
