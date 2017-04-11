@@ -2,6 +2,7 @@
 package com.inc.xy.model;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.springframework.data.annotation.Id;
 
@@ -11,24 +12,27 @@ import org.springframework.data.annotation.Id;
  */
 public class Document {
     @Id
-    private String id;
+    private String model;
     
-    private Map data;
+    private Map structure;
 
-    public Map getData() {
-        if(data == null){
-            this.data = new HashMap();
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public Map getStructure() {
+        if(structure == null){
+            this.structure = new HashMap();
         }
-        return data;
+        return structure;
     }
 
-    public void setData(Map data) {
-        this.data = data;
-    }
-
-    @Override
-    public String toString() {
-        return "Document{" + "data=" + data + '}';
+    public void setStructure(Map structure) {
+        this.structure = structure;
     }
     
     
