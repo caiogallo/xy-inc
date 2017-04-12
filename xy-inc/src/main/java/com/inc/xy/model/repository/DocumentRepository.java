@@ -10,9 +10,6 @@ import org.springframework.data.mongodb.core.query.BasicQuery;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -21,48 +18,54 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class DocumentRepository{
+    private static final String _MODEL = "_model";
+    private static final String ID = "id";
+    private static final String _ID = "_id";
     
     @Autowired
     private MongoTemplate mongoTemplate;
     
-    public List<Document> findByModel(String model){
-        BasicQuery query = new BasicQuery("{\"model\": \"" + model + "\"}");
+    public List<Document> findByModel(final String model){
+        Query query = new Query();
+        query.addCriteria(Criteria.where(_MODEL).is(model));
         return mongoTemplate.find(query, Document.class);
     }
     
-    public Document findByModelAndId(String model, long id){
+    public Document findByModelAndId(final String model, final long id){
         Query query = new Query();
-        query.addCriteria(Criteria.where("id").is(id).and("model").is(model));
+        query.addCriteria(Criteria.where(ID).is(id).and(_MODEL).is(model));
         Document findOne = mongoTemplate.findOne(query, Document.class);
         return findOne;
     }
+
     
-    public boolean save(final Document document, 
+    public void save(final Document document, 
             final String model){
-        
-        Document doc = document;
-        
-        // verifica se documento existe para merge
-        if(doc.get("id") != null){
-            long id = doc.get("id", Long.class);
-            Document findByModelAndId = findByModelAndId(model,id);            
-            doc.put("_id", findByModelAndId.get("_id"));
-        }else{
-            doc.put("id", getNextSequence(model));
-        }
-        
-        mongoTemplate.save(doc);
-        return true;
+        Document doc = document;        
+        doc = verifyInsertOrUpdate(doc, model);
+        mongoTemplate.save(doc);       
     }
-    
-    public boolean delete(final String model,
-            final long id){
-        Query q = new Query(Criteria.where("model").is(model).and("id").is(id));
+
+    public boolean delete(final String model, final long id){
+        Query q = new Query(Criteria.where(_MODEL).is(model).and(ID).is(id));
         return mongoTemplate.findAndRemove(q, Document.class) != null;
     }    
 
-    private long getNextSequence(String model){
-        Query query = new Query(Criteria.where("id").is(model));
+    private Document verifyInsertOrUpdate(final Document doc, final String model) {
+        Document document = doc;
+        if(document.get(ID) != null){
+            long id = document.get(ID, Long.class);
+            Document findByModelAndId = findByModelAndId(model,id);            
+            document.put(_ID, findByModelAndId.get(_ID));
+        }else{
+            document.put(ID, getNextSequence(model));
+        }
+        return document;
+    }
+    
+    
+    private long getNextSequence(final String model){
+        Query query = new Query(Criteria.where(ID).is(model));
 
         Update update = new Update();
         update.inc("seq", 1);

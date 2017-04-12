@@ -1,5 +1,6 @@
 package com.inc.xy.rest.controller;
 
+import com.inc.xy.model.mapper.MapperDocumentVO;
 import com.inc.xy.model.repository.DocumentRepository;
 import com.inc.xy.rest.vo.DocumentResponseVO;
 import java.util.List;
@@ -8,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,15 +23,22 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/xy-inc/v1/{model}")
 public class XYController {
+    private static final String ID = "id";
+    private static final String _MODEL = "_model";
     
     @Autowired
     private DocumentRepository documentRepository;
     
+    @Autowired
+    private MapperDocumentVO mapperDocumentVO;
+    
     @RequestMapping(method = RequestMethod.GET)
-    public List<Document> getAll(@PathVariable("model") String model){
-        List<Document> findByModel = documentRepository.findByModel(model);
+    public HttpEntity<List<DocumentResponseVO>> getAll(@PathVariable("model") String model){
         
-        return findByModel;
+        List<Document> findByModel = documentRepository.findByModel(model);
+        return findByModel != null ?
+                new ResponseEntity(mapperDocumentVO.mapFromList(findByModel), HttpStatus.OK):
+                new ResponseEntity(HttpStatus.NOT_FOUND);
     }
     
     @RequestMapping(method = RequestMethod.POST,
@@ -40,23 +47,24 @@ public class XYController {
     public HttpEntity<DocumentResponseVO> save(
             @PathVariable(value = "model", required = true) String model, 
             @RequestBody(required = true) Document body){
-        body.put("model", model);
-        body.remove("id");
         
+        body.put(_MODEL, model);
+        body.remove(ID);        
         documentRepository.save(body, model);        
-        return new ResponseEntity(
-                new DocumentResponseVO(body), HttpStatus.OK);
+        return new ResponseEntity(mapperDocumentVO.mapFrom(body), HttpStatus.OK);
     }
+
     
     @RequestMapping(value = "/{id}", 
             method = RequestMethod.GET, 
             produces = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<DocumentResponseVO> getById(
             @PathVariable(value = "model", required = true) String model,
-            @PathVariable(value = "id", required = true) long id){
+            @PathVariable(value = ID, required = true) long id){
+        
         Document doc = documentRepository.findByModelAndId(model, id);
         return doc != null ? 
-                new ResponseEntity(new DocumentResponseVO(doc), HttpStatus.OK): 
+                new ResponseEntity(mapperDocumentVO.mapFrom(doc), HttpStatus.OK): 
                 new ResponseEntity(HttpStatus.NOT_FOUND);
     }
     
@@ -66,19 +74,24 @@ public class XYController {
             consumes = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<DocumentResponseVO> edit(
             @PathVariable(value = "model", required = true) String model,
-            @PathVariable(value = "id", required = true) long id,
+            @PathVariable(value = ID, required = true) long id,
             @RequestBody Document body){
-        body.put("id", id);
-        body.put("model", model);
+        
+        body.put(ID, id);
+        body.put(_MODEL, model);
         documentRepository.save(body, model);
         return new ResponseEntity(HttpStatus.OK);
     }
     
     @RequestMapping(value = "/{id}",
             method = RequestMethod.DELETE)
-    public HttpEntity delete(@PathVariable(value = "model", required = true) String model,
-            @PathVariable(value = "id", required = true) long id){
+    public HttpEntity delete(
+            @PathVariable(value = "model", required = true) String model,
+            @PathVariable(value = ID, required = true) long id){
+        
         boolean delete = documentRepository.delete(model, id);
-        return delete ? new ResponseEntity(HttpStatus.OK): new ResponseEntity(HttpStatus.BAD_REQUEST);
+        return delete ? 
+                new ResponseEntity(HttpStatus.OK): 
+                new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 }

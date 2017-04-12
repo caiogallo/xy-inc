@@ -13,7 +13,7 @@ public class DocumentResponseVO {
     public Map data;
 
     public DocumentResponseVO(Map data) {
-        data = new HashMap(data);
+        this.data = data;
     }
     
     public Map getData() {

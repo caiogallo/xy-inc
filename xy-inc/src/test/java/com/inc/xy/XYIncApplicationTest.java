@@ -1,7 +1,6 @@
 package com.inc.xy;
 
 import com.inc.xy.rest.controller.XYController;
-import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
