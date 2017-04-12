@@ -1,8 +1,8 @@
-package com.inc.xy.rest.controller;
+package com.inc.xy.rest.v1.controller;
 
 import com.inc.xy.model.mapper.MapperDocumentVO;
 import com.inc.xy.model.repository.DocumentRepository;
-import com.inc.xy.rest.vo.DocumentResponseVO;
+import com.inc.xy.rest.v1.vo.DocumentResponseVO;
 import java.util.List;
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;

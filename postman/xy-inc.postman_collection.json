@@ -1,0 +1,90 @@
+{
+	"variables": [],
+	"info": {
+		"name": "xy-inc",
+		"_postman_id": "75196b9f-9d58-4b50-f4cd-2342d8060db0",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "post",
+			"request": {
+				"url": "http://localhost:8080/xy-inc/v1/Product",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": 10,\n  \"name\": \"mouse 10\",\n  \"price\": 50\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "get",
+			"request": {
+				"url": "http://localhost:8080/xy-inc/v1/mymodeltest",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "get-by-id",
+			"request": {
+				"url": "http://localhost:8080/xy-inc/v1/Product/2",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "change",
+			"request": {
+				"url": "http://localhost:8080/xy-inc/v1/Product/2",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"Product 2 xxxxxxxx\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "delete",
+			"request": {
+				"url": "http://localhost:8080/xy-inc/v1/Product/2",
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

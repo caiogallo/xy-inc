@@ -1,6 +1,6 @@
 package com.inc.xy.model.mapper;
 
-import com.inc.xy.rest.vo.DocumentResponseVO;
+import com.inc.xy.rest.v1.vo.DocumentResponseVO;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

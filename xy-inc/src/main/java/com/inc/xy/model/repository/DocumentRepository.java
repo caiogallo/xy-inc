@@ -39,17 +39,23 @@ public class DocumentRepository{
     }
 
     
-    public void save(final Document document, 
+    public Document save(final Document document, 
             final String model){
         Document doc = document;        
-        doc = verifyInsertOrUpdate(doc, model);
-        mongoTemplate.save(doc);       
+        doc = verifyInsertOrUpdate(doc, model);                
+        mongoTemplate.save(doc);     
+        return document;
     }
 
     public boolean delete(final String model, final long id){
         Query q = new Query(Criteria.where(_MODEL).is(model).and(ID).is(id));
         return mongoTemplate.findAndRemove(q, Document.class) != null;
-    }    
+    }   
+    
+    public void clearModel(final String model){
+        Query q = new Query(Criteria.where(_MODEL).is(model));
+        mongoTemplate.remove(q, Document.class);
+    }
 
     private Document verifyInsertOrUpdate(final Document doc, final String model) {
         Document document = doc;

@@ -1,4 +1,4 @@
-package com.inc.xy.rest.vo;
+package com.inc.xy.rest.v1.vo;
 
 import java.util.HashMap;
 import java.util.Map;
