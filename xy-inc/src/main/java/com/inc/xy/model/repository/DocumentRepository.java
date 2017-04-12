@@ -1,11 +1,8 @@
 package com.inc.xy.model.repository;
 
 import com.inc.xy.model.repository.model.SequenceId;
-import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.model.Filters;
 import java.util.List;
 import org.bson.Document;
-import org.bson.conversions.Bson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.FindAndModifyOptions;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -13,7 +10,9 @@ import org.springframework.data.mongodb.core.query.BasicQuery;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -48,16 +47,18 @@ public class DocumentRepository{
             long id = doc.get("id", Long.class);
             Document findByModelAndId = findByModelAndId(model,id);            
             doc.put("_id", findByModelAndId.get("_id"));
+        }else{
+            doc.put("id", getNextSequence(model));
         }
         
         mongoTemplate.save(doc);
         return true;
     }
     
-    public void delete(final String model,
+    public boolean delete(final String model,
             final long id){
         Query q = new Query(Criteria.where("model").is(model).and("id").is(id));
-        mongoTemplate.findAndRemove(q, Document.class);
+        return mongoTemplate.findAndRemove(q, Document.class) != null;
     }    
 
     private long getNextSequence(String model){
