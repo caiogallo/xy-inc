@@ -77,10 +77,16 @@ public class XYController {
             @PathVariable(value = ID, required = true) long id,
             @RequestBody Document body){
         
-        body.put(ID, id);
-        body.put(_MODEL, model);
-        documentRepository.save(body, model);
-        return new ResponseEntity(HttpStatus.OK);
+        boolean existe = documentRepository.findByModelAndId(model, id) != null;
+        
+        if(existe){
+            body.put(ID, id);
+            body.put(_MODEL, model);
+            documentRepository.save(body, model);
+            return new ResponseEntity(mapperDocumentVO.mapFrom(body), HttpStatus.OK);
+        }else{
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
     }
     
     @RequestMapping(value = "/{id}",
