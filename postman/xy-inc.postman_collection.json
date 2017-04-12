@@ -30,7 +30,7 @@
 		{
 			"name": "get",
 			"request": {
-				"url": "http://localhost:8080/xy-inc/v1/mymodeltest",
+				"url": "http://localhost:8080/xy-inc/v1/Product",
 				"method": "GET",
 				"header": [
 					{
@@ -47,7 +47,7 @@
 		{
 			"name": "get-by-id",
 			"request": {
-				"url": "http://localhost:8080/xy-inc/v1/Product/2",
+				"url": "http://localhost:8080/xy-inc/v1/Product/1",
 				"method": "GET",
 				"header": [],
 				"body": {},
@@ -58,7 +58,7 @@
 		{
 			"name": "change",
 			"request": {
-				"url": "http://localhost:8080/xy-inc/v1/Product/2",
+				"url": "http://localhost:8080/xy-inc/v1/Product/1",
 				"method": "PUT",
 				"header": [
 					{
@@ -78,7 +78,7 @@
 		{
 			"name": "delete",
 			"request": {
-				"url": "http://localhost:8080/xy-inc/v1/Product/2",
+				"url": "http://localhost:8080/xy-inc/v1/Product/1",
 				"method": "DELETE",
 				"header": [],
 				"body": {},
