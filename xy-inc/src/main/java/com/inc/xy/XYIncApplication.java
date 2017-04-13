@@ -1,6 +1,6 @@
 package com.inc.xy;
 
-import com.inc.xy.model.repository.DocumentRepository;
+import com.inc.xy.model.repository.impl.DocumentRepositoryImpl;
 import java.util.List;
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class XYIncApplication implements CommandLineRunner{
     @Autowired 
-    private DocumentRepository documentRepository;
+    private DocumentRepositoryImpl documentRepository;
             
     public static void main(String[] args) {
         SpringApplication.run(XYIncApplication.class, args);
