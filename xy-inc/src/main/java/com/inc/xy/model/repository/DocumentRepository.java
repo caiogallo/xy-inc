@@ -7,8 +7,6 @@ package com.inc.xy.model.repository;
 
 import java.util.List;
 import org.bson.Document;
-import org.springframework.stereotype.Repository;
-
 /**
  *
  * @author caio
