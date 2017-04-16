@@ -8,27 +8,14 @@
       <script src="lib/angular/angular.js"></script>
       <script src="lib/angular/angular-messages.js"></script>
       <script src="lib/angular/angular-locale_pt-br.js"></script>
-
+      <script src="lib/angular/angular-route.js"></script>
       <script src="js/app.js"></script>
       <script src="js/controllers/indexCtrl.js"></script>
       <script src="js/services/XYApiService.js"></script>
-
       <script src="js/values/configValue.js"></script>
+      <script src="js/config/routeConfig.js"></script>
    </head>
-   <body ng-controller="indexCtrl">
-      <div class="jumbotron">
-         <input type="text" placeholder="pelo que deseja buscar"
-         ng-model="cModelo">
-         <table class="table">
-            <tr>
-               <th>Modelo</th>
-            </tr>
-            <tr ng-repeat="modelo in modelos | filter:cModelo">
-               <td>{{modelo.name}}</td>
-            </tr>
-         </table>
-      </div>
+   <body>
+     <div ng-view></div>
    </body>
 </html>
-
-

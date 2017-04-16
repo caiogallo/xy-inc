@@ -1,0 +1,12 @@
+<div class="jumbotron" ng-controller="indexCtrl">
+   <input type="text" placeholder="pelo que deseja buscar"
+   ng-model="cModelo">
+   <table class="table">
+      <tr>
+         <th>Modelo</th>
+      </tr>
+      <tr ng-repeat="modelo in modelos | filter:cModelo">
+         <td><a href="show.html/model={{modelo.name}}">{{modelo.name}}</a></td>
+      </tr>
+   </table>
+</div>
