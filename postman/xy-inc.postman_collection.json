@@ -21,7 +21,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"id\": 10,\n  \"name\": \"mouse 10\",\n  \"price\": 50\n}"
+					"raw": "{\n  \"name\": \"mouse 10\",\n  \"price\": 50\n}"
 				},
 				"description": ""
 			},
@@ -69,7 +69,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"name\": \"Product 2 xxxxxxxx\"\n}"
+					"raw": "{\n  \"name\": \"Product 2 yyyy\"\n}"
 				},
 				"description": ""
 			},
@@ -80,6 +80,17 @@
 			"request": {
 				"url": "http://localhost:8080/xy-inc/v1/Product/1",
 				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "get-all-models",
+			"request": {
+				"url": "http://localhost:8080/xy-inc/models/v1",
+				"method": "GET",
 				"header": [],
 				"body": {},
 				"description": ""
