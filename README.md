@@ -10,6 +10,8 @@ o MongoDB no docker foi para diminuir a quantidade de configurações necessári
 para rodar o projeto.
 A ferramenta de build Maven foi utilizada para construir e gerenciar as
 dependências do projeto.
+Para o frontend, a tecnologia escolhida foi o angular 1 devido a facilidade de
+integração com api rest e rapidez no desenvolvimento.
 
 ## Configurações
 
@@ -69,3 +71,6 @@ Para facilitar os testes da API Rest criei um projeto que pode ser importado
 dentro do [PostMan](https://www.getpostman.com/), ela já possui exemplos de
 utilização com um modelo chamado *Product*, mas pode ser testado usando outros
 modelos conforme desejar.
+
+Para acessar a aplicação web, abra a url
+[http://localhost:8080/index.html#/modelos](http://localhost:8080/index.html#/modelos) no seu navegado. Caso todos os itens de uma coleção seja excluído ela será excluída.
