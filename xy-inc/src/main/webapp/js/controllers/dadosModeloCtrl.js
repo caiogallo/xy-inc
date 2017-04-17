@@ -2,11 +2,8 @@ angular.module("xy").controller("dadosModeloCtrl", function ($scope, $route, $lo
    $scope.nomeModelo = $route.current.params.nomeModelo;
    $scope.message = '';
    $scope.estrutura = [
-     {
-       chave: null,
-       valor: null,
-     }
-   ]
+
+   ];
 
    var _editarDocumento = function(){
      if($route.current.params.id){
@@ -22,9 +19,23 @@ angular.module("xy").controller("dadosModeloCtrl", function ($scope, $route, $lo
             $scope.editar = true;
           },function(data){
              $scope.message = data.data.error;
-          })
+          });
        }
-   }
+   };
+   
+   var _carregaColunasModelo = function(modelo){
+        if(!$route.current.params.id){
+            xyAPI.getModelColumns(modelo)
+                    .then(function(result){
+                result.data.forEach(function(item, index, arr){
+                    var _key = item.name;
+                    $scope.estrutura.push({chave: _key, value: null});
+                });
+            }, function(data){
+                $scope.message = data.data.error;
+            });
+        }
+   };
 
    var _getAll = function(nomeModelo){
       xyAPI.getAll(nomeModelo)
@@ -46,7 +57,7 @@ angular.module("xy").controller("dadosModeloCtrl", function ($scope, $route, $lo
 
    $scope.salvar = function(nomeModelo, estrutura, editar){
      var postJson = {
-     }
+     };
      estrutura.forEach(function(item, index, arr){
          if(item.chave){
              postJson[item.chave] = item.valor;
@@ -70,12 +81,13 @@ angular.module("xy").controller("dadosModeloCtrl", function ($scope, $route, $lo
              $scope.message = data.data.error;
           });
       }
-   }
+   };
 
    $scope.adicionarLinha = function(estrutura) {
      estrutura.push({chave: null, valor: null});
-   }
+   };
 
    _getAll($route.current.params.nomeModelo);
    _editarDocumento();
+   _carregaColunasModelo($route.current.params.nomeModelo);
 });

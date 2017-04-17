@@ -22,7 +22,13 @@ public class ModelResponseVO implements Serializable{
     
     public String name;
     
-    private Set<String> columnNames;
+    public ModelResponseVO(){
+        
+    }
+    
+    public ModelResponseVO(String name){
+        this.name = name;
+    }
 
     public String getName() {
         return name;
@@ -30,14 +36,6 @@ public class ModelResponseVO implements Serializable{
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Set<String> getColumnNames() {
-        return columnNames;
-    }
-
-    public void setColumnNames(Set<String> columnNames) {
-        this.columnNames = columnNames;
     }
 
     @Override

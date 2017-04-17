@@ -32,7 +32,7 @@ public class XYController {
     @Autowired
     private MapperDocumentVO mapperDocumentVO;
     
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<List<DocumentResponseVO>> getAll(@PathVariable("model") String model){
         
         List<Document> findByModel = documentRepository.findByModel(model);
