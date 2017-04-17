@@ -8,6 +8,7 @@ package com.inc.xy.rest.v1.vo;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -20,6 +21,8 @@ public class ModelResponseVO implements Serializable{
     private static final long serialVersionUID = -6633629237346517941L;
     
     public String name;
+    
+    private Set<String> columnNames;
 
     public String getName() {
         return name;
@@ -27,6 +30,14 @@ public class ModelResponseVO implements Serializable{
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<String> getColumnNames() {
+        return columnNames;
+    }
+
+    public void setColumnNames(Set<String> columnNames) {
+        this.columnNames = columnNames;
     }
 
     @Override

@@ -15,5 +15,6 @@ import org.bson.Document;
 public interface ModelRepository {
 
     List<Document> findAllModels();
+    List<Document> getColumnsByModel(final String model);
     
 }

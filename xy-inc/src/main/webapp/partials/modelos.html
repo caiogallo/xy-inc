@@ -1,0 +1,21 @@
+<div class="jumbotron">
+   <div ng-include="'partials/alert.html'"></div>
+   <input type="text" placeholder="pelo que deseja buscar"
+   ng-model="cModelo">
+   <table class="table">
+      <tr>
+         <th>Modelo</th>
+      </tr>
+      <tr ng-repeat="modelo in modelos | filter:cModelo">
+         <td><a href="#/detalheModelo/{{modelo.name}}">{{modelo.name}}</a></td>
+      </tr>
+   </table>
+</div>
+<div class="jumbotron">
+   <hr/>
+   <h3>Novo modelo</h3>
+   <form name="novoForm">
+     <input type="text" placeholder="digite o nome do novo modelo" ng-model="novoModelo" ng-required="true"/>
+   </form>
+   <a class="btn btn-primary" href="#/novoDadosModelo/{{novoModelo}}" ng-disabled="novoForm.$invalid">Criar novo modelo</a>
+</div>

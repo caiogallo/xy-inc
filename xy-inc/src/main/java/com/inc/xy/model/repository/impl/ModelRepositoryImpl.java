@@ -29,4 +29,12 @@ public class ModelRepositoryImpl implements ModelRepository {
         query.fields().include(_MODEL);
         return mongoTemplate.find(query, Document.class);
     }
+    
+    @Override
+    public List<Document> getColumnsByModel(final String model) {
+        Query query = new Query(Criteria.where(_MODEL).is(model));
+        query.fields().exclude(_ID);
+        query.fields().exclude(_MODEL);     
+        return mongoTemplate.find(query, Document.class);
+    }
 }

@@ -1,11 +1,8 @@
-angular.module("xy").controller("indexCtrl", function ($scope, xyAPI) {
-
+angular.module("xy").controller("modeloCtrl", function ($scope, xyAPI) {
    xyAPI.getModels()
       .then(function(data){
          $scope.modelos = data.data;
       },function(data){
-         console.log(data)
+         $scope.message = data.data.error;
       });
-
-
 });
