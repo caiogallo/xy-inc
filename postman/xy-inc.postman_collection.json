@@ -21,7 +21,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"name\": \"mouse 10\",\n  \"price\": 50\n}"
+					"raw": "{\n  \"name\": \"mouse 1000\",\n  \"price\": 50,\n  \"id\": 5\n}"
 				},
 				"description": ""
 			},
@@ -47,7 +47,7 @@
 		{
 			"name": "get-by-id",
 			"request": {
-				"url": "http://localhost:8080/xy-inc/v1/Product/1",
+				"url": "http://localhost:8080/xy-inc/v1/Product/27",
 				"method": "GET",
 				"header": [],
 				"body": {},
@@ -58,7 +58,7 @@
 		{
 			"name": "change",
 			"request": {
-				"url": "http://localhost:8080/xy-inc/v1/Product/1",
+				"url": "http://localhost:8080/xy-inc/v1/Product/28",
 				"method": "PUT",
 				"header": [
 					{
@@ -69,7 +69,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"name\": \"Product 2 yyyy\"\n}"
+					"raw": "{\"price\":\"99\",\"name\":\"jose\",\"id\":28}"
 				},
 				"description": ""
 			},
@@ -90,6 +90,17 @@
 			"name": "get-all-models",
 			"request": {
 				"url": "http://localhost:8080/xy-inc/models/v1",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "get-model-columns",
+			"request": {
+				"url": "http://localhost:8080/xy-inc/models/v1/Product",
 				"method": "GET",
 				"header": [],
 				"body": {},
